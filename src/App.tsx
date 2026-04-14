@@ -2,6 +2,7 @@ import './index.css'
 import Header from './components/layout/Header'
 import Hero from './sections/Hero'
 import About from './sections/About'
+import Menu from './sections/Menu'
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <Header />
       <Hero />
       <About />
+      <Menu />
     </div>
   )
 }
