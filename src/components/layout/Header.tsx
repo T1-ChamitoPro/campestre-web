@@ -1,10 +1,11 @@
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ChevronDown } from 'lucide-react';
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { restaurantInfo } from '../../lib/constants';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isMoreOpen, setIsMoreOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -14,28 +15,25 @@ export default function Header() {
     if (isCantinaPage) {
       navigate('/');
       setTimeout(() => {
-        document.getElementById(id)?.scrollIntoView({ 
-          behavior: 'smooth',
-          block: 'start'
-        });
+        document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
       }, 100);
     } else {
-      document.getElementById(id)?.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
-      });
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
     }
     setIsOpen(false);
+    setIsMoreOpen(false);
   };
 
   const goToCantina = () => {
     navigate('/cantina');
     setIsOpen(false);
+    setIsMoreOpen(false);
   };
 
   const goToHome = () => {
     navigate('/');
     setIsOpen(false);
+    setIsMoreOpen(false);
   };
 
   return (
@@ -47,58 +45,61 @@ export default function Header() {
           className="flex items-center gap-3 cursor-pointer" 
           onClick={goToHome}
         >
-          <div className="w-9 h-9 sm:w-11 sm:h-11 bg-primary rounded-full flex items-center justify-center text-dark font-bold text-xl sm:text-2xl flex-shrink-0">
+          <div className="w-9 h-9 sm:w-11 sm:h-11 bg-primary rounded-full flex items-center justify-center text-dark font-bold text-xl sm:text-2xl">
             C
           </div>
-          <div className="min-w-0">
+          <div>
             <h1 className="text-xl sm:text-2xl font-bold tracking-tight">
-              {isCantinaPage ? "La Cantina" : restaurantInfo.name}
+              El Campestre
             </h1>
-            <p className="text-[10px] sm:text-xs text-text-muted -mt-1 truncate">
-              {isCantinaPage ? "Bebidas y buen ambiente" : restaurantInfo.slogan}
-            </p>
           </div>
         </div>
 
         {/* Navegación Desktop */}
-        <nav className="hidden md:flex items-center gap-7 text-sm font-medium">
-          {!isCantinaPage && (
-            <>
-              <button 
-                onClick={() => scrollToSection('inicio')} 
-                className="hover:text-primary transition-colors"
-              >
-                Inicio
-              </button>
-              <button 
-                onClick={() => scrollToSection('sobre')} 
-                className="hover:text-primary transition-colors"
-              >
-                Sobre Nosotros
-              </button>
-            </>
-          )}
-          
+        <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
+          <button onClick={() => scrollToSection('inicio')} className="hover:text-primary transition-colors">Inicio</button>
+          <button onClick={() => scrollToSection('sobre')} className="hover:text-primary transition-colors">Sobre Nosotros</button>
+          <button onClick={() => scrollToSection('menu')} className="hover:text-primary transition-colors">Menú</button>
+
+          {/* La Cantina - Enlace directo */}
           <button 
             onClick={goToCantina}
-            className={`hover:text-primary transition-colors ${isCantinaPage ? 'text-primary font-semibold' : ''}`}
+            className={`hover:text-primary transition-colors font-medium ${isCantinaPage ? 'text-primary' : ''}`}
           >
-            Cantina
+            La Cantina
           </button>
+
+          {/* Dropdown para futuros negocios */}
+          <div className="relative">
+            <button 
+              onClick={() => setIsMoreOpen(!isMoreOpen)}
+              className="flex items-center gap-1 hover:text-primary transition-colors"
+            >
+              Más Negocios
+              <ChevronDown size={16} className={`transition-transform ${isMoreOpen ? 'rotate-180' : ''}`} />
+            </button>
+
+            {isMoreOpen && (
+              <div className="absolute top-10 right-0 bg-zinc border border-zinc-light rounded-2xl shadow-xl w-56 py-3 z-50">
+                <div className="px-6 py-2 text-xs text-text-muted">Próximamente</div>
+                {/* Aquí se agregarán futuros negocios */}
+              </div>
+            )}
+          </div>
         </nav>
 
         {/* Botón Principal */}
         <button
-          onClick={isCantinaPage ? goToHome : () => scrollToSection('menu')}
+          onClick={() => scrollToSection('menu')}
           className="hidden md:block bg-primary hover:bg-primary-dark text-dark px-6 py-3 rounded-full text-sm font-semibold transition-all"
         >
-          {isCantinaPage ? "Volver al Restaurante" : "Ver Menú"}
+          Ver Menú
         </button>
 
-        {/* Botón Menú Móvil */}
+        {/* Menú Móvil */}
         <button 
           onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden p-2 text-white hover:text-primary transition-colors"
+          className="md:hidden p-2 text-white"
         >
           {isOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
@@ -108,28 +109,9 @@ export default function Header() {
       {isOpen && (
         <div className="md:hidden bg-zinc border-t border-zinc-light">
           <nav className="flex flex-col px-6 py-8 gap-2 text-lg">
-            {!isCantinaPage && (
-              <>
-                <button 
-                  onClick={() => scrollToSection('inicio')} 
-                  className="text-left py-4 px-4 rounded-xl hover:bg-zinc-light"
-                >
-                  Inicio
-                </button>
-                <button 
-                  onClick={() => scrollToSection('sobre')} 
-                  className="text-left py-4 px-4 rounded-xl hover:bg-zinc-light"
-                >
-                  Sobre Nosotros
-                </button>
-                <button 
-                  onClick={() => scrollToSection('menu')} 
-                  className="text-left py-4 px-4 rounded-xl hover:bg-zinc-light"
-                >
-                  Menú
-                </button>
-              </>
-            )}
+            <button onClick={() => scrollToSection('inicio')} className="text-left py-4 px-4 rounded-xl hover:bg-zinc-light">Inicio</button>
+            <button onClick={() => scrollToSection('sobre')} className="text-left py-4 px-4 rounded-xl hover:bg-zinc-light">Sobre Nosotros</button>
+            <button onClick={() => scrollToSection('menu')} className="text-left py-4 px-4 rounded-xl hover:bg-zinc-light">Menú</button>
             
             <button 
               onClick={goToCantina}
@@ -138,12 +120,10 @@ export default function Header() {
               La Cantina
             </button>
 
-            <button 
-              onClick={isCantinaPage ? goToHome : () => scrollToSection('menu')}
-              className="mt-6 bg-primary hover:bg-primary-dark text-dark py-4 rounded-2xl font-semibold"
-            >
-              {isCantinaPage ? "Volver al Restaurante" : "Ver Menú"}
-            </button>
+            <div className="pt-6 border-t border-zinc-light mt-4">
+              <p className="text-sm text-text-muted px-4 mb-3">Más Negocios</p>
+              <div className="px-6 py-3 text-text-muted text-sm">Próximamente...</div>
+            </div>
           </nav>
         </div>
       )}
