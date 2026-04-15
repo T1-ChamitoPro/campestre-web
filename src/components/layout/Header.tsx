@@ -1,126 +1,104 @@
-import { Menu, X, ChevronDown } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { Menu, X } from 'lucide-react';
+import { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { restaurantInfo } from '../../lib/constants';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isNegociosOpen, setIsNegociosOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('inicio');
+  const location = useLocation();
+  const navigate = useNavigate();
 
-  // Detectar sección activa
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      { rootMargin: '-100px 0px -50% 0px', threshold: 0.4 }
-    );
-
-    const sections = document.querySelectorAll('section[id]');
-    sections.forEach((section) => observer.observe(section));
-
-    return () => observer.disconnect();
-  }, []);
+  const isCantinaPage = location.pathname === '/cantina';
 
   const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      const offset = 90;
-      const offsetPosition = element.getBoundingClientRect().top + window.scrollY - offset;
-      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+    if (isCantinaPage) {
+      navigate('/');
+      setTimeout(() => {
+        document.getElementById(id)?.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }, 100);
+    } else {
+      document.getElementById(id)?.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
     }
     setIsOpen(false);
-    setIsNegociosOpen(false);
   };
 
-  const negocios = [
-    { id: 'campestre', label: 'El Campestre - Restaurante' },
-    { id: 'cantina', label: 'Cantina' },
-    { id: 'cabana', label: 'Cabaña (Comidas Rápidas)' },
-    { id: 'tiendita', label: 'Tiendita' },
-    { id: 'micheladas', label: 'Puesto de Micheladas' },
-    { id: 'dulces', label: 'Dulces y Snacks' },
-    { id: 'carnes', label: 'Carnes Llaneras' },
-  ];
+  const goToCantina = () => {
+    navigate('/cantina');
+    setIsOpen(false);
+  };
+
+  const goToHome = () => {
+    navigate('/');
+    setIsOpen(false);
+  };
 
   return (
     <header className="bg-dark border-b border-zinc-light sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
         
         {/* Logo */}
-        <div className="flex items-center gap-3">
-          <div className="w-9 h-9 sm:w-11 sm:h-11 bg-primary rounded-full flex items-center justify-center text-dark font-bold text-xl sm:text-2xl">
+        <div 
+          className="flex items-center gap-3 cursor-pointer" 
+          onClick={goToHome}
+        >
+          <div className="w-9 h-9 sm:w-11 sm:h-11 bg-primary rounded-full flex items-center justify-center text-dark font-bold text-xl sm:text-2xl flex-shrink-0">
             C
           </div>
           <div className="min-w-0">
-            <h1 className="text-xl sm:text-2xl font-bold tracking-tight truncate">
-              {restaurantInfo.name}
+            <h1 className="text-xl sm:text-2xl font-bold tracking-tight">
+              {isCantinaPage ? "La Cantina" : restaurantInfo.name}
             </h1>
             <p className="text-[10px] sm:text-xs text-text-muted -mt-1 truncate">
-              {restaurantInfo.slogan}
+              {isCantinaPage ? "Bebidas y buen ambiente" : restaurantInfo.slogan}
             </p>
           </div>
         </div>
 
         {/* Navegación Desktop */}
-        <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
-          <button onClick={() => scrollToSection('inicio')} className={`hover:text-primary transition-colors ${activeSection === 'inicio' ? 'text-primary' : ''}`}>
-            Inicio
-          </button>
-          <button onClick={() => scrollToSection('sobre')} className={`hover:text-primary transition-colors ${activeSection === 'sobre' ? 'text-primary' : ''}`}>
-            Sobre Nosotros
-          </button>
-
-          {/* Dropdown Negocios */}
-          <div className="relative group">
-            <button 
-              onClick={() => setIsNegociosOpen(!isNegociosOpen)}
-              className="flex items-center gap-1 hover:text-primary transition-colors"
-            >
-              Negocios
-              <ChevronDown size={16} />
-            </button>
-
-            {/* Menú desplegable */}
-            {isNegociosOpen && (
-              <div className="absolute top-10 left-0 bg-zinc border border-zinc-light rounded-2xl shadow-xl py-4 w-64 z-50">
-                {negocios.map((negocio) => (
-                  <button
-                    key={negocio.id}
-                    onClick={() => scrollToSection(negocio.id)}
-                    className="w-full text-left px-6 py-3 hover:bg-zinc-light transition-colors text-sm"
-                  >
-                    {negocio.label}
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
-
-          <button onClick={() => scrollToSection('reservas')} className={`hover:text-primary transition-colors ${activeSection === 'reservas' ? 'text-primary' : ''}`}>
-            Reservas
-          </button>
-          <button onClick={() => scrollToSection('contacto')} className={`hover:text-primary transition-colors ${activeSection === 'contacto' ? 'text-primary' : ''}`}>
-            Contacto
+        <nav className="hidden md:flex items-center gap-7 text-sm font-medium">
+          {!isCantinaPage && (
+            <>
+              <button 
+                onClick={() => scrollToSection('inicio')} 
+                className="hover:text-primary transition-colors"
+              >
+                Inicio
+              </button>
+              <button 
+                onClick={() => scrollToSection('sobre')} 
+                className="hover:text-primary transition-colors"
+              >
+                Sobre Nosotros
+              </button>
+            </>
+          )}
+          
+          <button 
+            onClick={goToCantina}
+            className={`hover:text-primary transition-colors ${isCantinaPage ? 'text-primary font-semibold' : ''}`}
+          >
+            Cantina
           </button>
         </nav>
 
-        {/* Botón Reservas */}
+        {/* Botón Principal */}
         <button
-          onClick={() => scrollToSection('reservas')}
-          className="hidden md:block bg-primary hover:bg-primary-dark text-dark px-5 py-2.5 rounded-full text-sm font-semibold transition-all"
+          onClick={isCantinaPage ? goToHome : () => scrollToSection('menu')}
+          className="hidden md:block bg-primary hover:bg-primary-dark text-dark px-6 py-3 rounded-full text-sm font-semibold transition-all"
         >
-          Reservas
+          {isCantinaPage ? "Volver al Restaurante" : "Ver Menú"}
         </button>
 
-        {/* Menú Móvil */}
+        {/* Botón Menú Móvil */}
         <button 
           onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden p-2 text-white"
+          className="md:hidden p-2 text-white hover:text-primary transition-colors"
         >
           {isOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
@@ -130,7 +108,42 @@ export default function Header() {
       {isOpen && (
         <div className="md:hidden bg-zinc border-t border-zinc-light">
           <nav className="flex flex-col px-6 py-8 gap-2 text-lg">
-            {/* ... (menú móvil similar) */}
+            {!isCantinaPage && (
+              <>
+                <button 
+                  onClick={() => scrollToSection('inicio')} 
+                  className="text-left py-4 px-4 rounded-xl hover:bg-zinc-light"
+                >
+                  Inicio
+                </button>
+                <button 
+                  onClick={() => scrollToSection('sobre')} 
+                  className="text-left py-4 px-4 rounded-xl hover:bg-zinc-light"
+                >
+                  Sobre Nosotros
+                </button>
+                <button 
+                  onClick={() => scrollToSection('menu')} 
+                  className="text-left py-4 px-4 rounded-xl hover:bg-zinc-light"
+                >
+                  Menú
+                </button>
+              </>
+            )}
+            
+            <button 
+              onClick={goToCantina}
+              className="text-left py-4 px-4 rounded-xl hover:bg-zinc-light text-primary font-semibold"
+            >
+              La Cantina
+            </button>
+
+            <button 
+              onClick={isCantinaPage ? goToHome : () => scrollToSection('menu')}
+              className="mt-6 bg-primary hover:bg-primary-dark text-dark py-4 rounded-2xl font-semibold"
+            >
+              {isCantinaPage ? "Volver al Restaurante" : "Ver Menú"}
+            </button>
           </nav>
         </div>
       )}
