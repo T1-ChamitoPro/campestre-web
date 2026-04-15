@@ -32,4 +32,11 @@ export const cantinaData: CantinaProduct[] = [
   { id: 21, name: "Coca-Cola 2.25 litros", price: 11000, category: "Gaseosas" },
   { id: 22, name: "Postobón 3.125 litros", price: 12000, category: "Gaseosas" },
   { id: 23, name: "Coca-Cola 3 litros", price: 13000, category: "Gaseosas" },
+
+  // Tragos Cortos
+  { id: 24, name: "Aguardiente Verde", price: 70000, category: "Tragos Cortos" },
+  { id: 25, name: "Aguardiente Amarillo", price: 75000, category: "Tragos Cortos" },
+  { id: 26, name: "Aguardiente Azul", price: 80000, category: "Tragos Cortos" },
+  { id: 27, name: "Old Parr (750 ml)", price: 200000, category: "Tragos Cortos" },
+  { id: 28, name: "Buchanna's Master (750 ml)", price: 220000, category: "Tragos Cortos" },
 ];

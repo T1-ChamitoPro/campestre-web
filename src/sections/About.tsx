@@ -28,27 +28,11 @@ export default function About() {
                 celebración importante, en El Campestre encontrarás calidez y sabor en cada plato.
               </p>
             </div>
-
-            <div className="mt-10 flex flex-wrap gap-8">
-              <div>
-                <p className="text-4xl font-bold text-primary">9+</p>
-                <p className="text-text-muted">Años de experiencia</p>
-              </div>
-              <div>
-                <p className="text-4xl font-bold text-primary">5000+</p>
-                <p className="text-text-muted">Clientes felices</p>
-              </div>
-              <div>
-                <p className="text-4xl font-bold text-primary">50+</p>
-                <p className="text-text-muted">Eventos realizados</p>
-              </div>
-            </div>
           </div>
 
-          {/* Imagen */}
+          {/* Imagen / Decoración */}
           <div className="relative">
             <div className="aspect-square bg-zinc-light rounded-3xl overflow-hidden">
-              {/* Aquí puedes poner otra foto del restaurante más adelante */}
               <div className="w-full h-full bg-gradient-to-br from-primary/20 to-transparent flex items-center justify-center">
                 <span className="text-8xl opacity-10">🌳</span>
               </div>
@@ -57,7 +41,7 @@ export default function About() {
             {/* Decoración */}
             <div className="absolute -bottom-6 -right-6 bg-dark border border-zinc-light p-6 rounded-2xl">
               <p className="font-semibold text-primary">Ambiente Campestre</p>
-              <p className="text-sm text-text-muted">Espacio abierto • Parqueadero • Música en vivo</p>
+              <p className="text-sm text-text-muted">Espacio abierto • Parqueadero • Rio Guatapuri </p>
             </div>
           </div>
 
