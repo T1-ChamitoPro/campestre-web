@@ -20,7 +20,7 @@ export const menuData: Dish[] = [
   {
     id: 2,
     name: "Sopa de costilla",
-    price: 16000,
+    price: 17000,
     category: "Platos de la Casa",
     accompaniments: "Viene con una porción de arroz blanco",
     image: "/src/assets/platos/sopa-costilla.jpg"

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { X } from 'lucide-react';
 import { menuData, type Dish } from '../lib/menuData';
-
+import { motion } from 'framer-motion';
 export default function Menu() {
   const [selectedDish, setSelectedDish] = useState<Dish | null>(null);
 
@@ -22,33 +22,41 @@ export default function Menu() {
         </div>
 
         {/* Contenedor del Menú */}
-        <div className="bg-dark border border-zinc-light rounded-3xl overflow-hidden">
-          <div className="bg-zinc px-6 sm:px-8 py-5 border-b border-zinc-light">
-            <h3 className="text-xl font-semibold text-white">Lista de Platos</h3>
-          </div>
-
-          <div className="max-h-[620px] overflow-y-auto custom-scroll p-4 sm:p-6 space-y-3">
-            {menuData.map((dish) => (
-              <div
-                key={dish.id}
-                onClick={() => setSelectedDish(dish)}
-                className="group bg-zinc-light hover:bg-zinc border border-transparent hover:border-primary/40 rounded-2xl px-5 sm:px-7 py-5 sm:py-6 flex justify-between items-center cursor-pointer transition-all duration-300"
-              >
-                <div className="pr-4 flex-1">
-                  <h3 className="text-base sm:text-lg font-medium group-hover:text-primary transition-colors">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {menuData.map((dish: Dish, index: number) => (
+            <motion.div
+              key={dish.id || index}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: index * 0.05 }}
+              viewport={{ once: true }}
+              onClick={() => setSelectedDish(dish)}
+              className="group bg-zinc-900/90 backdrop-blur-md border border-zinc-800 rounded-3xl p-8 hover:border-primary hover:bg-zinc-900 transition-all duration-300 cursor-pointer"
+            >
+              <div className="flex justify-between items-start mb-6">
+                <div className="flex-1">
+                  <h3 className="text-2xl font-semibold text-white group-hover:text-primary transition-colors duration-300">
                     {dish.name}
                   </h3>
-                  <p className="text-xs sm:text-sm text-text-muted mt-1.5">{dish.category}</p>
+                  {dish.category && (
+                    <p className="text-sm text-zinc-500 mt-1">{dish.category}</p>
+                  )}
                 </div>
 
-                <div className="text-right flex-shrink-0">
-                  <span className="text-xl sm:text-2xl font-bold text-primary">
+                <div className="text-right">
+                  <span className="text-3xl font-bold text-primary">
                     {formatPrice(dish.price)}
                   </span>
                 </div>
               </div>
-            ))}
-          </div>
+
+              {dish.description && (
+                <p className="text-zinc-400 text-[15px] leading-relaxed line-clamp-3">
+                  {dish.description}
+                </p>
+              )}
+            </motion.div>
+          ))}
         </div>
       </div>
 
@@ -90,8 +98,7 @@ export default function Menu() {
             <div className="p-6 border-t border-zinc-light bg-zinc flex-shrink-0">
               <button 
                 onClick={() => setSelectedDish(null)}
-                className="w-full bg-primary hover:bg-primary-dark text-dark font-semibold py-4 rounded-2xl transition-all text-base"
-              >
+                className="w-full bg-primary hover:bg-primary-dark text-dark font-semibold py-4 rounded-2xl transition-all text-base">
                 Cerrar
               </button>
             </div>
