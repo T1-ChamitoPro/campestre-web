@@ -8,7 +8,7 @@ export default function Hero() {
       {/* Imagen de fondo */}
       <div className="absolute inset-0 bg-black">
         <img 
-          src="/src/assets/hero.png" 
+          src="/src/assets/campestre.jpg" 
           alt="El Campestre Restaurant"
           className="w-full h-full object-cover opacity-80"
         />
