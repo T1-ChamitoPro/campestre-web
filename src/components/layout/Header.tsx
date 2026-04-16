@@ -66,7 +66,6 @@ export default function Header() {
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
           <button onClick={() => scrollToSection('inicio')} className="hover:text-primary transition-colors">Inicio</button>
           <button onClick={() => scrollToSection('sobre')} className="hover:text-primary transition-colors">Sobre Nosotros</button>
-          <button onClick={() => scrollToSection('menu')} className="hover:text-primary transition-colors">Menú</button>
 
           {/* La Cantina - Enlace directo (fijo) */}
           <button 
