@@ -10,9 +10,10 @@ export default function Header() {
   const navigate = useNavigate();
 
   const isCantinaPage = location.pathname === '/cantina';
+  const isCabanaPage = location.pathname === '/cabana';
 
   const scrollToSection = (id: string) => {
-    if (isCantinaPage) {
+    if (isCantinaPage || isCabanaPage) {
       navigate('/');
       setTimeout(() => {
         document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
@@ -26,6 +27,12 @@ export default function Header() {
 
   const goToCantina = () => {
     navigate('/cantina');
+    setIsOpen(false);
+    setIsMoreOpen(false);
+  };
+
+  const goToCabana = () => {
+    navigate('/cabana');
     setIsOpen(false);
     setIsMoreOpen(false);
   };
@@ -61,7 +68,7 @@ export default function Header() {
           <button onClick={() => scrollToSection('sobre')} className="hover:text-primary transition-colors">Sobre Nosotros</button>
           <button onClick={() => scrollToSection('menu')} className="hover:text-primary transition-colors">Menú</button>
 
-          {/* La Cantina - Enlace directo */}
+          {/* La Cantina - Enlace directo (fijo) */}
           <button 
             onClick={goToCantina}
             className={`hover:text-primary transition-colors font-medium ${isCantinaPage ? 'text-primary' : ''}`}
@@ -69,7 +76,7 @@ export default function Header() {
             La Cantina
           </button>
 
-          {/* Dropdown para futuros negocios */}
+          {/* Dropdown para Más Negocios */}
           <div className="relative">
             <button 
               onClick={() => setIsMoreOpen(!isMoreOpen)}
@@ -81,8 +88,15 @@ export default function Header() {
 
             {isMoreOpen && (
               <div className="absolute top-10 right-0 bg-zinc border border-zinc-light rounded-2xl shadow-xl w-56 py-3 z-50">
-                <div className="px-6 py-2 text-xs text-text-muted">Próximamente</div>
-                {/* Aquí se agregarán futuros negocios */}
+                <div className="px-6 py-2 text-xs text-text-muted">Nuestros Negocios</div>
+                
+                {/* Solo La Cabaña en el dropdown */}
+                <button 
+                  onClick={goToCabana}
+                  className={`w-full text-left px-6 py-3 hover:bg-zinc-light transition-colors ${isCabanaPage ? 'text-primary' : ''}`}
+                >
+                  La Cabaña
+                </button>
               </div>
             )}
           </div>
@@ -120,10 +134,12 @@ export default function Header() {
               La Cantina
             </button>
 
-            <div className="pt-6 border-t border-zinc-light mt-4">
-              <p className="text-sm text-text-muted px-4 mb-3">Más Negocios</p>
-              <div className="px-6 py-3 text-text-muted text-sm">Próximamente...</div>
-            </div>
+            <button 
+              onClick={goToCabana}
+              className="text-left py-4 px-4 rounded-xl hover:bg-zinc-light text-primary font-semibold"
+            >
+              La Cabaña
+            </button>
           </nav>
         </div>
       )}

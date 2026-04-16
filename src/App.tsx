@@ -8,6 +8,7 @@ import Menu from './sections/Menu'
 import Policies from './sections/Policies'
 import Footer from './components/layout/Footer'
 import Cantina from './pages/Cantina'
+import Cabana from './pages/Cabana'
 
 function CampestrePage() {
   return (
@@ -54,6 +55,21 @@ function App() {
               transition={{ duration: 0.1, ease: "easeInOut" }}
             >
               <Cantina />
+            </motion.div>
+          } 
+        />
+
+       {/* Nueva Página: La Cabaña */}
+        <Route 
+          path="/cabana" 
+          element={
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.1, ease: "easeInOut" }}
+            >
+              <Cabana />
             </motion.div>
           } 
         />
