@@ -37,10 +37,10 @@ export default function Cabana() {
             onError={(e) => (e.target as HTMLImageElement).style.display = 'none'}
           />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/70 to-black" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/50 to-black" />
 
         {/* Overlay con degradado */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/70 to-black" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/50 to-black" />
 
         {/* Contenido del Hero */}
         <div className="relative z-10 text-center px-6 max-w-4xl">
@@ -59,7 +59,7 @@ export default function Cabana() {
             transition={{ delay: 0.5 }}
             className="text-xl sm:text-2xl text-zinc-300 max-w-xl mx-auto"
           >
-            Comida rápida • Sabores auténticos • Precios justos
+            Comida rápida • Opa gang nam style • Eh eh eh eh  
           </motion.p>
         </div>
 
@@ -113,31 +113,6 @@ export default function Cabana() {
       </section>
 
       <Footer />
-
-      {/* Modal */}
-      {selectedItem && (
-        <div className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 flex items-center justify-center p-6">
-          <motion.div
-            initial={{ scale: 0.95, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            className="bg-zinc-900 rounded-3xl max-w-md w-full p-10 relative"
-          >
-            <button 
-              onClick={() => setSelectedItem(null)} 
-              className="absolute top-6 right-6 text-zinc-400 hover:text-white"
-            >
-              <X size={32} />
-            </button>
-            
-            <h3 className="text-3xl font-bold text-white mb-3">{selectedItem.name}</h3>
-            <p className="text-primary mb-8">{selectedItem.category}</p>
-            
-            <div className="text-5xl font-bold text-primary">
-              {formatPrice(selectedItem.price)}
-            </div>
-          </motion.div>
-        </div>
-      )}
     </>
   );
 }
