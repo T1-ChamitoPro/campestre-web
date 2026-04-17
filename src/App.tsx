@@ -9,6 +9,7 @@ import Policies from './sections/Policies'
 import Footer from './components/layout/Footer'
 import Cantina from './pages/Cantina'
 import Cabana from './pages/Cabana'
+import Galeria from './pages/Galeria'     // ← Nueva importación
 
 function CampestrePage() {
   return (
@@ -29,6 +30,7 @@ function App() {
   return (
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
+        
         {/* Página Principal - El Campestre */}
         <Route 
           path="/" 
@@ -59,7 +61,7 @@ function App() {
           } 
         />
 
-       {/* Nueva Página: La Cabaña */}
+        {/* Página de La Cabaña */}
         <Route 
           path="/cabana" 
           element={
@@ -73,6 +75,22 @@ function App() {
             </motion.div>
           } 
         />
+
+        {/* Nueva Página: Galería */}
+        <Route 
+          path="/galeria" 
+          element={
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.1, ease: "easeInOut" }}
+            >
+              <Galeria />
+            </motion.div>
+          } 
+        />
+
       </Routes>
     </AnimatePresence>
   )

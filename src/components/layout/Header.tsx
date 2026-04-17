@@ -1,7 +1,6 @@
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { restaurantInfo } from '../../lib/constants';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,9 +10,10 @@ export default function Header() {
 
   const isCantinaPage = location.pathname === '/cantina';
   const isCabanaPage = location.pathname === '/cabana';
+  const isGaleriaPage = location.pathname === '/galeria';
 
   const scrollToSection = (id: string) => {
-    if (isCantinaPage || isCabanaPage) {
+    if (isCantinaPage || isCabanaPage || isGaleriaPage) {
       navigate('/');
       setTimeout(() => {
         document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
@@ -33,6 +33,12 @@ export default function Header() {
 
   const goToCabana = () => {
     navigate('/cabana');
+    setIsOpen(false);
+    setIsMoreOpen(false);
+  };
+
+  const goToGaleria = () => {
+    navigate('/galeria');
     setIsOpen(false);
     setIsMoreOpen(false);
   };
@@ -66,6 +72,7 @@ export default function Header() {
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
           <button onClick={() => scrollToSection('inicio')} className="hover:text-primary transition-colors">Inicio</button>
           <button onClick={() => scrollToSection('sobre')} className="hover:text-primary transition-colors">Sobre Nosotros</button>
+          <button onClick={() => scrollToSection('menu')} className="hover:text-primary transition-colors">Menú</button>
 
           {/* La Cantina - Enlace directo (fijo) */}
           <button 
@@ -89,12 +96,18 @@ export default function Header() {
               <div className="absolute top-10 right-0 bg-zinc border border-zinc-light rounded-2xl shadow-xl w-56 py-3 z-50">
                 <div className="px-6 py-2 text-xs text-text-muted">Nuestros Negocios</div>
                 
-                {/* Solo La Cabaña en el dropdown */}
                 <button 
                   onClick={goToCabana}
                   className={`w-full text-left px-6 py-3 hover:bg-zinc-light transition-colors ${isCabanaPage ? 'text-primary' : ''}`}
                 >
                   La Cabaña
+                </button>
+
+                <button 
+                  onClick={goToGaleria}
+                  className={`w-full text-left px-6 py-3 hover:bg-zinc-light transition-colors ${isGaleriaPage ? 'text-primary' : ''}`}
+                >
+                  Galería
                 </button>
               </div>
             )}
@@ -138,6 +151,13 @@ export default function Header() {
               className="text-left py-4 px-4 rounded-xl hover:bg-zinc-light text-primary font-semibold"
             >
               La Cabaña
+            </button>
+
+            <button 
+              onClick={goToGaleria}
+              className="text-left py-4 px-4 rounded-xl hover:bg-zinc-light text-primary font-semibold"
+            >
+              Galería
             </button>
           </nav>
         </div>
