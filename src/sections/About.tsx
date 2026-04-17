@@ -1,50 +1,62 @@
-import { restaurantInfo } from '../lib/constants';
+import { motion } from 'framer-motion';
 
 export default function About() {
   return (
-    <section id="sobre" className="py-24 bg-zinc">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="grid md:grid-cols-2 gap-16 items-center">
+    <section id="sobre" className="py-24 bg-zinc-950">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           
-          {/* Texto */}
-          <div>
-            <div className="inline-block bg-primary/10 text-primary px-4 py-1.5 rounded-full text-sm font-medium mb-6">
-              Nuestra Historia
-            </div>
-            
-            <h2 className="text-5xl font-bold leading-tight mb-8">
-              Un pedazo de campo<br />en el corazón de Valledupar
-            </h2>
-
-            <div className="space-y-6 text-lg text-text-muted">
-              <p>
-                El Campestre nació con la idea de traer los sabores auténticos del campo a la ciudad. 
-                Desde 2015, nos hemos convertido en el lugar favorito para disfrutar de buena comida, 
-                ambiente familiar y momentos especiales.
-              </p>
-              <p>
-                Nuestro enfoque está en ingredientes frescos, carnes de calidad y recetas tradicionales 
-                preparadas con cariño. Ya sea para una comida familiar, un evento empresarial o una 
-                celebración importante, en El Campestre encontrarás calidez y sabor en cada plato.
-              </p>
+          {/* Columna Izquierda - Imagen */}
+          <div className="relative">
+            <div className="aspect-square bg-zinc-900 rounded-3xl overflow-hidden border border-zinc-800">
+              <img 
+                src="/assets/about-campestre.jpg"
+                alt="El Campestre - Ambiente campestre familiar"
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                onError={(e) => {
+                  (e.target as HTMLImageElement).style.display = 'none';
+                  console.warn("Imagen about-campestre.jpg no encontrada");
+                }}
+              />
+              {/* Overlay sutil */}
+              <div className="absolute inset-0 bg-gradient-to-br from-black/30 to-transparent" />
             </div>
           </div>
 
-          {/* Imagen / Decoración */}
-          <div className="relative">
-            <div className="aspect-square bg-zinc-light rounded-3xl overflow-hidden">
-              <div className="w-full h-full bg-gradient-to-br from-primary/20 to-transparent flex items-center justify-center">
-                <span className="text-8xl opacity-10">🌳</span>
+          {/* Columna Derecha - Texto */}
+          <div className="space-y-8">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-5xl font-bold text-white tracking-tighter mb-6">
+                Nuestra Historia
+              </h2>
+              
+              <div className="space-y-6 text-zinc-300 text-lg leading-relaxed">
+                <p>
+                  El Campestre nace como un sueño familiar: crear un espacio donde la buena comida, 
+                  la naturaleza y la calidez se encuentren en un solo lugar.
+                </p>
+                <p>
+                  Ubicados a orillas del río Guatapurí, ofrecemos una experiencia auténtica de 
+                  comida campestre con ingredientes frescos y preparaciones tradicionales.
+                </p>
+                <p>
+                  Más que un restaurante, somos un lugar para compartir momentos especiales 
+                  con familia y amigos, rodeados de un ambiente natural y acogedor.
+                </p>
+              </div>
+            </motion.div>
+
+            <div className="pt-6">
+              <div className="inline-flex items-center gap-3 bg-zinc-900 px-6 py-3 rounded-2xl border border-zinc-700">
+                <div className="w-3 h-3 bg-primary rounded-full animate-pulse"></div>
+                <span className="text-sm text-zinc-400">Abierto desde 2018</span>
               </div>
             </div>
-            
-            {/* Decoración */}
-            <div className="absolute -bottom-6 -right-6 bg-dark border border-zinc-light p-6 rounded-2xl">
-              <p className="font-semibold text-primary">Ambiente Campestre</p>
-              <p className="text-sm text-text-muted">Espacio abierto • Parqueadero • Rio Guatapuri </p>
-            </div>
           </div>
-
         </div>
       </div>
     </section>
