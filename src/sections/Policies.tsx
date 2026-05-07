@@ -11,6 +11,34 @@ export default function Policies() {
 
         <div className="grid lg:grid-cols-2 gap-10">
 
+          {/* Reglas Generales - Full Width */}
+          <div className="mt-12 bg-red-950/30 border border-red-900/50 rounded-3xl p-10">
+            <h3 className="text-red-400 text-2xl font-semibold mb-8 flex items-center gap-3">
+              ⚠️ Reglas del Restaurante
+            </h3>
+
+            <div className="space-y-8 text-text-muted">
+              <div>
+                <p className="font-medium text-white mb-2">1. Prohibición de ingreso de productos externos</p>
+                <p>No está permitido ingresar gaseosas, bebidas embriagantes, snacks ni ningún tipo de comida externa.</p>
+                <p className="text-red-400 text-sm mt-2">En caso de detectarse, se cobrará el valor del producto ingresado.</p>
+              </div>
+
+              <div>
+                <p className="font-medium text-white mb-2">2. Prohibido el ingreso de comida y equipos de sonido</p>
+                <p>Está terminantemente prohibido ingresar comida y usar equipos de sonido dentro del restaurante.</p>
+                <p className="text-red-400 text-sm mt-2">
+                  Somos un restaurante y estamos para vender nuestros productos.
+                  El consumo de entradas no da derecho a violar estas normas.
+                </p>
+              </div>
+            </div>
+
+            <p className="text-center text-sm text-red-400/80 mt-10 font-medium">
+              Por favor respete estas reglas para mantener un buen ambiente para todos.
+            </p>
+          </div>
+
           {/* Horario y Precio de Entrada */}
           <div className="space-y-8">
             {/* Horario */}
@@ -67,34 +95,6 @@ export default function Policies() {
               <li>El tiempo de preparación puede demorar hasta <span className="text-white">25 minutos</span>, dependiendo de la cantidad de pedidos previos.</li>
             </ol>
           </div>
-        </div>
-
-        {/* Reglas Generales - Full Width */}
-        <div className="mt-12 bg-red-950/30 border border-red-900/50 rounded-3xl p-10">
-          <h3 className="text-red-400 text-2xl font-semibold mb-8 flex items-center gap-3">
-            ⚠️ Reglas del Restaurante
-          </h3>
-
-          <div className="space-y-8 text-text-muted">
-            <div>
-              <p className="font-medium text-white mb-2">1. Prohibición de ingreso de productos externos</p>
-              <p>No está permitido ingresar gaseosas, bebidas embriagantes, snacks ni ningún tipo de comida externa.</p>
-              <p className="text-red-400 text-sm mt-2">En caso de detectarse, se cobrará el valor del producto ingresado.</p>
-            </div>
-
-            <div>
-              <p className="font-medium text-white mb-2">2. Prohibido el ingreso de comida y equipos de sonido</p>
-              <p>Está terminantemente prohibido ingresar comida y usar equipos de sonido dentro del restaurante.</p>
-              <p className="text-red-400 text-sm mt-2">
-                Somos un restaurante y estamos para vender nuestros productos.
-                El consumo de entradas no da derecho a violar estas normas.
-              </p>
-            </div>
-          </div>
-
-          <p className="text-center text-sm text-red-400/80 mt-10 font-medium">
-            Por favor respete estas reglas para mantener un buen ambiente para todos.
-          </p>
         </div>
       </div>
     </section>

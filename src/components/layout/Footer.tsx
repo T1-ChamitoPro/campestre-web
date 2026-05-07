@@ -1,21 +1,32 @@
 import { restaurantInfo } from '../../lib/constants';
 import { Phone, MapPin, Clock } from 'lucide-react';
+import { useRandomLogo } from '../../hooks/useRandomLogo';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const logoUrl = useRandomLogo();
 
   return (
     <footer className="bg-dark border-t border-zinc-light pt-16 pb-10">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
-          
+
           {/* Logo + Info */}
           <div>
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-dark font-bold text-3xl">
-                C
-              </div>
+
+            <div>
               <div>
+                {logoUrl ? (
+                  <img
+                    src={logoUrl}
+                    alt="Campestre rio"
+                    className="w-9 h-9 sm:w-11 sm:h-11 object-contain rounded-full"
+                  />
+                ) : (
+                  <div className="w-9 h-9 sm:w-11 sm:h-11 bg-primary rounded-full flex items-center justify-center text-dark font-bold text-xl sm:text-2xl">
+                    C
+                  </div>
+                )}
                 <h3 className="text-2xl font-bold">{restaurantInfo.name}</h3>
                 <p className="text-sm text-text-muted">{restaurantInfo.slogan}</p>
               </div>
@@ -46,7 +57,7 @@ export default function Footer() {
               </div>
               <div className="flex items-start gap-3">
                 <Phone className="text-primary mt-0.5" size={20} />
-                <a 
+                <a
                   href={`https://wa.me/${restaurantInfo.whatsapp}`}
                   className="text-text-muted hover:text-primary"
                 >
