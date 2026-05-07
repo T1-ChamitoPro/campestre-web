@@ -8,4 +8,9 @@ export default defineConfig({
     react(),
     tailwindcss(),     // ← Esto es lo importante para que Tailwind funcione fácil
   ],
+  resolve: {
+    alias: {
+      '@': '/src',
+    },
+  },
 })
