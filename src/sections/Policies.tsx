@@ -1,6 +1,6 @@
 export default function Policies() {
   return (
-    <section className="py-20 bg-zinc border-t border-zinc-light">
+    <section id="policies" className="py-20 bg-zinc border-t border-zinc-light">
       <div className="max-w-5xl mx-auto px-6">
         <div className="text-center mb-14">
           <h2 className="text-4xl font-bold mb-4 text-white">Información Importante</h2>
@@ -10,7 +10,7 @@ export default function Policies() {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-10">
-          
+
           {/* Horario y Precio de Entrada */}
           <div className="space-y-8">
             {/* Horario */}
@@ -57,7 +57,7 @@ export default function Policies() {
           {/* Reglas y Políticas al pedir */}
           <div className="bg-dark border border-zinc-light rounded-3xl p-8">
             <h3 className="text-primary text-2xl font-semibold mb-8">📋 Al momento de hacer tu pedido</h3>
-            
+
             <ol className="space-y-6 text-text-muted list-decimal pl-5">
               <li>Al tomar tu pedido, por favor indica el nombre de la persona que pagará la cuenta.</li>
               <li>Indica la hora aproximada en la que deseas que llegue tu pedido (a partir de las 12:00, en intervalos de 30 minutos).</li>
@@ -74,7 +74,7 @@ export default function Policies() {
           <h3 className="text-red-400 text-2xl font-semibold mb-8 flex items-center gap-3">
             ⚠️ Reglas del Restaurante
           </h3>
-          
+
           <div className="space-y-8 text-text-muted">
             <div>
               <p className="font-medium text-white mb-2">1. Prohibición de ingreso de productos externos</p>
@@ -86,7 +86,7 @@ export default function Policies() {
               <p className="font-medium text-white mb-2">2. Prohibido el ingreso de comida y equipos de sonido</p>
               <p>Está terminantemente prohibido ingresar comida y usar equipos de sonido dentro del restaurante.</p>
               <p className="text-red-400 text-sm mt-2">
-                Somos un restaurante y estamos para vender nuestros productos. 
+                Somos un restaurante y estamos para vender nuestros productos.
                 El consumo de entradas no da derecho a violar estas normas.
               </p>
             </div>

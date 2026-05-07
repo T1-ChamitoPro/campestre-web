@@ -1,10 +1,14 @@
+import { img } from 'framer-motion/client';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useRandomLogo } from '../../hooks/useRandomLogo.ts';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [isMoreOpen, setIsMoreOpen] = useState(false);
+
+  const logoUrl = useRandomLogo();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -52,15 +56,25 @@ export default function Header() {
   return (
     <header className="bg-dark border-b border-zinc-light sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
-        
+
         {/* Logo */}
-        <div 
-          className="flex items-center gap-3 cursor-pointer" 
+        <div
+          className="flex items-center gap-3 cursor-pointer"
           onClick={goToHome}
         >
-          <div className="w-9 h-9 sm:w-11 sm:h-11 bg-primary rounded-full flex items-center justify-center text-dark font-bold text-xl sm:text-2xl">
-            C
-          </div>
+
+          {logoUrl ? (
+            <img
+              src={logoUrl}
+              alt="Campestre rio"
+              className="w-9 h-9 sm:w-11 sm:h-11 object-contain rounded-full"
+            />
+          ) : (
+            <div className="w-9 h-9 sm:w-11 sm:h-11 bg-primary rounded-full flex items-center justify-center text-dark font-bold text-xl sm:text-2xl">
+              C
+            </div>
+          )}
+
           <div>
             <h1 className="text-xl sm:text-2xl font-bold tracking-tight">
               El Campestre
@@ -72,11 +86,11 @@ export default function Header() {
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
           <button onClick={() => scrollToSection('inicio')} className="hover:text-primary transition-colors">Inicio</button>
           <button onClick={() => scrollToSection('sobre')} className="hover:text-primary transition-colors">Sobre Nosotros</button>
-          <button onClick={goToCantina} className={`hover:text-primary transition-colors font-medium ${isCantinaPage ? 'text-primary' : ''}`}> La Cantina </button>
+          <button onClick={() => scrollToSection('policies')} className="hover:text-primary transition-colors">Importante</button>
 
           {/* Dropdown para Más Negocios */}
           <div className="relative">
-            <button 
+            <button
               onClick={() => setIsMoreOpen(!isMoreOpen)}
               className="flex items-center gap-1 hover:text-primary transition-colors"
             >
@@ -87,15 +101,22 @@ export default function Header() {
             {isMoreOpen && (
               <div className="absolute top-10 right-0 bg-zinc border border-zinc-light rounded-2xl shadow-xl w-56 py-3 z-50">
                 <div className="px-6 py-2 text-xs text-text-muted">Nuestros Negocios</div>
-                
-                <button 
+
+                <button
+                  onClick={goToCantina}
+                  className={`w-full text-left px-6 py-3 hover:bg-zinc-light transition-colors ${isCantinaPage ? 'text-primary' : ''}`}
+                >
+                  La cantina
+                </button>
+
+                <button
                   onClick={goToCabana}
                   className={`w-full text-left px-6 py-3 hover:bg-zinc-light transition-colors ${isCabanaPage ? 'text-primary' : ''}`}
                 >
                   La Cabaña
                 </button>
 
-                <button 
+                <button
                   onClick={goToGaleria}
                   className={`w-full text-left px-6 py-3 hover:bg-zinc-light transition-colors ${isGaleriaPage ? 'text-primary' : ''}`}
                 >
@@ -115,7 +136,7 @@ export default function Header() {
         </button>
 
         {/* Menú Móvil */}
-        <button 
+        <button
           onClick={() => setIsOpen(!isOpen)}
           className="md:hidden p-2 text-white"
         >
@@ -130,22 +151,22 @@ export default function Header() {
             <button onClick={() => scrollToSection('inicio')} className="text-left py-4 px-4 rounded-xl hover:bg-zinc-light">Inicio</button>
             <button onClick={() => scrollToSection('sobre')} className="text-left py-4 px-4 rounded-xl hover:bg-zinc-light">Sobre Nosotros</button>
             <button onClick={() => scrollToSection('menu')} className="text-left py-4 px-4 rounded-xl hover:bg-zinc-light">Menú</button>
-            
-            <button 
+
+            <button
               onClick={goToCantina}
               className="text-left py-4 px-4 rounded-xl hover:bg-zinc-light text-primary font-semibold"
             >
               La Cantina
             </button>
 
-            <button 
+            <button
               onClick={goToCabana}
               className="text-left py-4 px-4 rounded-xl hover:bg-zinc-light text-primary font-semibold"
             >
               La Cabaña
             </button>
 
-            <button 
+            <button
               onClick={goToGaleria}
               className="text-left py-4 px-4 rounded-xl hover:bg-zinc-light text-primary font-semibold"
             >
