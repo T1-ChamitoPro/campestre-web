@@ -1,4 +1,3 @@
-import { img } from 'framer-motion/client';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
