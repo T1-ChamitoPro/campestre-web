@@ -86,6 +86,7 @@ export default function Header() {
           <button onClick={() => scrollToSection('inicio')} className="hover:text-primary transition-colors">Inicio</button>
           <button onClick={() => scrollToSection('sobre')} className="hover:text-primary transition-colors">Sobre Nosotros</button>
           <button onClick={() => scrollToSection('policies')} className="hover:text-primary transition-colors">Importante</button>
+          <button onClick={goToGaleria} className={`hover:text-primary transition-colors ${isGaleriaPage ? 'text-primary' : ''}`}>Galería</button>
 
           {/* Dropdown para Más Negocios */}
           <div className="relative">
@@ -113,13 +114,6 @@ export default function Header() {
                   className={`w-full text-left px-6 py-3 hover:bg-zinc-light transition-colors ${isCabanaPage ? 'text-primary' : ''}`}
                 >
                   La Cabaña
-                </button>
-
-                <button
-                  onClick={goToGaleria}
-                  className={`w-full text-left px-6 py-3 hover:bg-zinc-light transition-colors ${isGaleriaPage ? 'text-primary' : ''}`}
-                >
-                  Galería
                 </button>
               </div>
             )}
