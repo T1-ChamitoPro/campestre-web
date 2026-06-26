@@ -1,12 +1,9 @@
-import { useState } from 'react';
-import { X } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
-import { cabanaMenuData, type CabanaItem } from '../lib/cabanaData';
+import { cabanaMenuData } from '../lib/cabanaData';
 
 export default function Cabana() {
-  const [selectedItem, setSelectedItem] = useState<CabanaItem | null>(null);
 
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat('es-CO', {
@@ -92,7 +89,6 @@ export default function Cabana() {
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ delay: index * 0.04 }}
-                      onClick={() => setSelectedItem(item)}
                       className="group bg-zinc-900 border border-zinc-800 hover:border-primary rounded-3xl p-7 transition-all duration-300 cursor-pointer hover:-translate-y-1"
                     >
                       <div className="flex justify-between items-start">

@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { X } from 'lucide-react';
 import { menuData, type Dish } from '../lib/menuData';
 import { motion } from 'framer-motion';
 export default function Menu() {
@@ -50,9 +49,9 @@ export default function Menu() {
                 </div>
               </div>
 
-              {dish.description && (
+              {dish.accompaniments && (
                 <p className="text-zinc-400 text-[15px] leading-relaxed line-clamp-3">
-                  {dish.description}
+                  {dish.accompaniments}
                 </p>
               )}
             </motion.div>

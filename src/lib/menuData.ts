@@ -4,7 +4,7 @@ export type Dish = {
   price: number;
   category: string;
   accompaniments?: string;
-  image: string;           // ← Nueva propiedad para la foto
+  image: string;      
 };
 
 export const menuData: Dish[] = [
