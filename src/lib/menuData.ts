@@ -1,3 +1,5 @@
+import arrozDeCerdo from "../assets/platos/arroz-de-cerdo.jpg";
+
 export type Dish = {
   id: number;
   name: string;
@@ -15,7 +17,7 @@ export const menuData: Dish[] = [
     price: 16000,
     category: "Platos de la Casa",
     accompaniments: "Acompañado con plátano asado y ensalada",
-    image: "/src/assets/platos/arroz-de-cerdo.jpg"
+    image: arrozDeCerdo
   },
   {
     id: 2,
