@@ -1,4 +1,5 @@
 import { restaurantInfo } from '../lib/constants';
+import hero from "../assets/campestre.jpg";
 
 export default function Hero() {
   return (
@@ -7,7 +8,7 @@ export default function Hero() {
       {/* Imagen de fondo */}
       <div className="absolute inset-0 bg-black">
         <img 
-          src="/src/assets/campestre.jpg" 
+          src={hero}
           alt="El Campestre Restaurant"
           className="w-full h-full object-cover opacity-80"
         />

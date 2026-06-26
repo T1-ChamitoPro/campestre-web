@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
 import { cabanaMenuData } from '../lib/cabanaData';
+import cabana from "../assets/cabana.jpg";
 
 export default function Cabana() {
 
@@ -28,7 +29,7 @@ export default function Cabana() {
          <div className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-black">
           <img
-            src="/src/assets/cabana.jpg"
+            src={cabana}
             alt="La Cantina"
             className="w-full h-full object-cover"
             onError={(e) => (e.target as HTMLImageElement).style.display = 'none'}

@@ -1,6 +1,7 @@
 import { cantinaData } from '../lib/cantinaData';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
+import cantina from "../assets/cantina.jpg";
 
 export default function Cantina() {
   const formatPrice = (price: number) => {
@@ -19,7 +20,7 @@ export default function Cantina() {
       <div className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-black">
           <img 
-            src="/src/assets/cantina.jpg" 
+            src={cantina}
             alt="La Cantina"
             className="w-full h-full object-cover"
             onError={(e) => (e.target as HTMLImageElement).style.display = 'none'}
