@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import about from "../assets/aboutCampestre.jpg";
 
 export default function About() {
   return (
@@ -10,7 +11,7 @@ export default function About() {
           <div className="relative">
             <div className="aspect-square bg-zinc-900 rounded-3xl overflow-hidden border border-zinc-800">
               <img
-                src="/src/assets/aboutCampestre.jpg"
+                src={about}
                 alt="El Campestre - Ambiente campestre familiar"
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
                 onError={(e) => {
